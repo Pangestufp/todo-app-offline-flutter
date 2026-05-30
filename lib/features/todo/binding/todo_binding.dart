@@ -7,11 +7,10 @@ import 'package:todo_app_offline/features/todo/service/todo_service_impl.dart';
 class TodoBinding extends Bindings {
   @override
   void dependencies() {
-    // Mendaftarkan implementasi TodoService.
+    // mendaftarkan implementasi TodoService (untuk dipakai di controller)
     Get.lazyPut<TodoService>(() => TodoServiceImpl());
 
-    // Mendaftarkan TodoController dan mengambil
-    // dependency TodoService yang telah didaftarkan sebelumnya.
+    // mendaftarkan TodoController dan mengambil dependency TodoService yang telah didaftarkan sebelumnya
     Get.lazyPut(() => TodoController(Get.find<TodoService>()));
   }
 }

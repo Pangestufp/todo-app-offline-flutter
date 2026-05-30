@@ -6,9 +6,9 @@ import 'package:todo_app_offline/shared/routes/routes.dart';
 
 
 class AppPages {
-  AppPages._();// Class ini hanya berisi member static dan tidak dibuat object-nya.
+  AppPages._();// class ini hanya berisi member static dan tidak dibuat object-nya
 
-  // Registrasi seluruh halaman aplikasi beserta route dan binding-nya. jadi flutter tau controller apa yg dipersiapkan di halaman
+  // registrasi seluruh halaman aplikasi beserta route dan binding-nya. jadi flutter tau controller apa yg dipersiapkan di halaman
   static final routes = [
     // Menu
     GetPage(

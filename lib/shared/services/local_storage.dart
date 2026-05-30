@@ -1,12 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
-  // Mengambil instance SharedPreferences.
+  // mengambil instance SharedPreferences shared preference
   Future<SharedPreferences> get _prefs {
     return SharedPreferences.getInstance();
   }
 
-  // Menyimpan data berdasarkan storage key.
+
+  // menyimpan data berdasarkan storage key ke shared preference
   Future<void> save(String storageKey, String value) async {
     final prefs = await _prefs;
 
@@ -16,14 +17,16 @@ class LocalStorage {
     );
   }
 
-  // Mengambil data berdasarkan storage key.
+
+  // mengambil data berdasarkan storage key dari shared preference
   Future<String?> get(String storageKey) async {
     final prefs = await _prefs;
 
     return prefs.getString(storageKey);
   }
 
-  // Menghapus data berdasarkan storage key.
+
+  //  menghapus data berdasarkan storage key dari shared preference
   Future<void> delete(String storageKey) async {
     final prefs = await _prefs;
 
