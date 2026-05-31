@@ -1,7 +1,7 @@
 # todo_app_offline (Flutter)
 
 # Overview
-Simple Todo Application built with Flutter and stores data locally using Shared Preferences without requiring an internet connection or backend server.
+Aplikasi menerapkan arsitektur modular dengan pemisahan controller, service, model, view, dan widget. State management menggunakan GetX untuk mengelola data dan navigasi aplikasi. Seluruh data Todo disimpan secara lokal menggunakan Shared Preferences sehingga aplikasi dapat digunakan tanpa backend maupun koneksi internet.
 
 ## Tech Stack
 
