@@ -72,7 +72,7 @@ class TodoServiceImpl implements TodoService {
 
   @override
   Future<List<Todo>> getByFilter(String? status, String? search, int page) async {
-    const int pageSize = 10;
+    const int pageSize = 5;
 
     List<Todo> todos = await _getTodos();
 

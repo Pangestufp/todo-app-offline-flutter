@@ -29,6 +29,9 @@ class TodoController extends GetxController {
   final selectedStatus = "Pending".obs;
   // default status
 
+  // ini yg dipilih buat edit
+  Todo? selectedTodo;
+
   //beberapa text editing yyg dipakai untuk filter dan crud
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -56,6 +59,7 @@ class TodoController extends GetxController {
       Get.snackbar(
         "Error",
         e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
       isLoading.value = false;
@@ -77,20 +81,22 @@ class TodoController extends GetxController {
 
       await _todoService.create(todo);
 
+      Get.back();
+
       await loadTodos();
 
       clearForm();
 
-      Get.back();
-
       Get.snackbar(
         "Success",
         "Todo berhasil ditambahkan",
+        snackPosition: SnackPosition.BOTTOM,
       );
     } catch (e) {
       Get.snackbar(
         "Error",
         e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
       isLoading.value = false;
@@ -98,7 +104,18 @@ class TodoController extends GetxController {
   }
 
   // mengubah todo yang sudah ada
-  Future<void> updateTodo(Todo todo) async {
+  Future<void> updateTodo() async {
+    final todo = selectedTodo;
+    if (todo==null ){
+      Get.snackbar(
+        "Success",
+        "Todo berhasil diubah",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+
+      return;
+    }
+
     try {
       isLoading.value = true;
 
@@ -112,20 +129,22 @@ class TodoController extends GetxController {
 
       await _todoService.update(updatedTodo);
 
+      Get.back();
+
       await loadTodos();
 
       clearForm();
 
-      Get.back();
-
       Get.snackbar(
         "Success",
         "Todo berhasil diubah",
+        snackPosition: SnackPosition.BOTTOM,
       );
     } catch (e) {
       Get.snackbar(
         "Error",
         e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
       isLoading.value = false;
@@ -152,11 +171,13 @@ class TodoController extends GetxController {
       Get.snackbar(
         "Success",
         "Todo selesai",
+        snackPosition: SnackPosition.BOTTOM,
       );
     } catch (e) {
       Get.snackbar(
         "Error",
         e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
       isLoading.value = false;
@@ -164,22 +185,24 @@ class TodoController extends GetxController {
   }
 
   // menghapus todo
-  Future<void> delete(String id) async {
+  Future<void> delete(Todo todo) async {
     try {
       isLoading.value = true;
 
-      await _todoService.delete(id);
+      await _todoService.delete(todo.id);
 
       await loadTodos();
 
       Get.snackbar(
         "Success",
         "Todo berhasil dihapus",
+        snackPosition: SnackPosition.BOTTOM,
       );
     } catch (e) {
       Get.snackbar(
         "Error",
         e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
       isLoading.value = false;
@@ -228,6 +251,7 @@ class TodoController extends GetxController {
 
   // mengisi form ketika edit.
   void setForm(Todo todo) {
+    selectedTodo = todo;
     titleController.text = todo.title;
     descriptionController.text = todo.description;
     selectedStatus.value = todo.status;
